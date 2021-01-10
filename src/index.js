@@ -1,28 +1,54 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Cell from './Cell'
 
-let boardMatrix = []
-const rows = 6
-const columns = 7
+class Board extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      rows: 6,
+      columns: 7,
+      boardMatrix: []
+    }
+  }
 
-function Cell() {
-  return (
-    <div>
-      <p>cell</p>
-    </div>
-  )
-}
+  generateBoardMatrix() {
+    console.log('test')
 
-class Game extends React.Component {
-  componentDidMount() {
-    generateBoardMatrix()
-    console.log(boardMatrix)
+    for(let y = 0; y < this.rows; y++) {
+      let newRow = []
+  
+      for(let x = 0; x < this.columns; x++) {
+        newRow.push('x')
+      }
+  
+      this.boardMatrix.push(newRow)
+    }
   }
 
   render() {
+    this.generateBoardMatrix()
+    
+    return (
+      <div className="board">
+        {this.boardMatrix.map((value, index) => {
+          return (
+            <Cell 
+              key={index}
+              value={value}
+            />
+          )
+        })}
+      </div>
+    )
+  }
+}
+
+class Game extends React.Component {
+  render() {
     return (
       <div id="game">
-        
+        <Board />
       </div>
     )
   }
@@ -32,13 +58,3 @@ ReactDOM.render(
   <Game />,
   document.getElementById('root')
 )
-
-function generateBoardMatrix() {
-  for(let y = 0; y < rows; y++) {
-    let newRow = []
-    for(let x = 0; x < columns; x++) {
-      newRow.push(null)
-    }
-    boardMatrix.push(newRow)
-  }
-}
