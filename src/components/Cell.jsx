@@ -1,13 +1,11 @@
 import React from 'react'
 
-class Cell extends React.Component {
-  render() {
-    return (
-      <div className="cell">
-
-      </div>
-    )
-  }
+function Cell(props) {
+  return (
+    <div className="cell">
+      <p>hi</p>
+    </div>
+  )
 }
 
 export default Cell
